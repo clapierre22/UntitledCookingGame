@@ -1,13 +1,12 @@
-package main;
+package src.main.java.clapierre;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener {
     static final int WIDTH = 640, HEIGHT = 480;
@@ -20,11 +19,7 @@ public class GamePanel extends JPanel implements ActionListener {
         setBackground(Color.BLACK);
         player = new Player(100, 300);
 
-        // Create platforms
-        platforms = new ArrayList<>();
-        platforms.add(new Rectangle(0, 400, WIDTH, 20)); // Ground
-
-        // Timer for game loop (60 FPS)
+        // 60 FPS
         timer = new Timer(16, this);
         timer.start();
 
@@ -32,15 +27,18 @@ public class GamePanel extends JPanel implements ActionListener {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT -> player.moveLeft();
-                    case KeyEvent.VK_RIGHT -> player.moveRight();
+                    // case KeyEvent.VK_LEFT -> player.moveLeft();
+                    // case KeyEvent.VK_RIGHT -> player.moveRight();
                     case KeyEvent.VK_SPACE -> player.jump();
+                    case KeyEvent.VK_A -> player.moveLeft();
+                    case KeyEvent.VK_D -> player.moveRight();
+                    case KeyEvent.VK_W -> player.jump();
                 }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_D) {
                     player.stop();
                 }
             }
@@ -56,12 +54,6 @@ public class GamePanel extends JPanel implements ActionListener {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        player.draw(g);
-
-        g.setColor(Color.GRAY);
-        for (Rectangle platform : platforms) {
-            g.fillRect(platform.x, platform.y, platform.width, platform.height);
-        }
+        // Draw player
     }
 }

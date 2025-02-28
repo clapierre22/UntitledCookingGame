@@ -1,4 +1,4 @@
-package main;
+package src.main.java.clapierre;
 
 import java.awt.*;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 public class Player {
     int x, y, width, height;
     int velocityX, velocityY;
+    int health, damage;
     boolean onGround;
     static final int SPEED = 4;
     static final int JUMP_POWER = -12;
@@ -19,6 +20,8 @@ public class Player {
         this.velocityX = 0;
         this.velocityY = 0;
         this.onGround = false;
+        this.health = 100;
+        this.damage = 10;
     }
 
     public void moveLeft() {
@@ -37,6 +40,15 @@ public class Player {
         if (onGround) {
             velocityY = JUMP_POWER;
             onGround = false;
+        }
+    }
+
+    public void attack(){
+        if (!onGround){
+            // Air Attack
+        }
+        else{
+            // Standard Attack
         }
     }
 
@@ -62,11 +74,11 @@ public class Player {
     }
 
     public Rectangle getBounds() {
+        // Bounding Box
         return new Rectangle(x, y, width, height);
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.fillRect(x, y, width, height);
+        // Draw player
     }
 }
