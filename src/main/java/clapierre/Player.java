@@ -3,6 +3,8 @@ package src.main.java.clapierre;
 import java.awt.*;
 import java.util.List;
 
+// Switch to Entity.java, extends to player and enemy seperately, but both have underlying entity logic anyway
+
 public class Player {
     int x, y, width, height;
     int velocityX, velocityY;
