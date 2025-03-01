@@ -1,6 +1,6 @@
 package src.main.java.clapierre;
 
-public class PlayerTwo extends Player{
+public class PlayerTwo extends Entity{
     public PlayerTwo(int x, int y){
         super(x, y);
     }

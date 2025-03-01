@@ -5,7 +5,7 @@ import java.util.List;
 
 // Switch to Entity.java, extends to player and enemy seperately, but both have underlying entity logic anyway
 
-public class Player {
+public class Entity {
     int x, y, width, height;
     int velocityX, velocityY;
     int health, damage;
@@ -14,7 +14,7 @@ public class Player {
     static final int JUMP_POWER = -12;
     static final int GRAVITY = 1;
 
-    public Player(int x, int y) {
+    public Entity(int x, int y) {
         this.x = x;
         this.y = y;
         this.width = 40;
