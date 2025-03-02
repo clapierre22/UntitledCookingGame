@@ -2,9 +2,17 @@ package src.main.java.clapierre;
 
 public class Enemy extends Entity{
     public Enemy(int x, int y){
-        // Maybe make this a player, or switch Player.java to Entity.java
         super(x, y);
+        this.entityType = 1;
+        this.entityName = "Enemy Entity";
     }
-    // Different controlls, can hold different items, etc.
+    
+    public void trackPlayer() {
+//    	Follow the player by telling the enemy to move to their current x y position
+    }
+    
+    public void attackPlayer() {
+//    	When close enough (player x,y - enemy x,y), attack in direction of player 
+    }
     
 }
