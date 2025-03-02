@@ -13,7 +13,7 @@ public class Entity {
     int velocityX, velocityY;
     int health, damage;
 //    0: Player, 1: Enemy, 2: Item
-    int entityType; 
+    int entityType, level, score; 
     boolean onGround;
     boolean pickup;
     int speed;
@@ -33,9 +33,11 @@ public class Entity {
         this.velocityY = 0;
         this.onGround = false;
         this.health = 100;
-        this.damage = 10;
+        this.damage = 5;
         this.pickup = false;
         this.speed = 0;
+        this.level = 1;
+        this.score = 0;
     }
 
     public void moveLeft() {
@@ -103,6 +105,19 @@ public class Entity {
     		g.setColor(Color.RED);
     		g.fillRect(x, y, width, height);
     	}
+    }
+    
+    protected BufferedImage loadSprite(String fileName) {
+//    	Still need to set specific directory for image files
+    	return null;
+    }
+    
+    protected void adjustHealth() {
+    	health += (health * (level * .25));
+    }
+    
+    protected void adjustScore() {
+    	score += (score * (level * .25));
     }
     
     public void setHealth(int newHealth) {

@@ -6,7 +6,7 @@ import java.util.List;
 public class Player extends Entity{
 //	Weapons only
 	List<Item> inventory;
-	int score;
+	int score, xp;
 	
 	BufferedImage idleSprite;
 	BufferedImage jumpSprite;
@@ -17,6 +17,7 @@ public class Player extends Entity{
         super(x, y);
         this.entityType = 0;
         this.speed = 4;
+        this.xp = 0;
         this.entityName = "Player Entity";
         this.idleSprite = null;
         this.jumpSprite = null;
@@ -41,7 +42,16 @@ public class Player extends Entity{
     	return inventory.contains(item);
     }
     
-    protected BufferedImage loadSprite(String fileName) {
-    	return null;
+    public void progression(int xpEarned) {
+//    	Xp is different from score, need to add battle logic that takes enemy level and multiplies it by 10 to get xpEarned
+    	xp += xpEarned;
+    	if (xp >= 1000) {
+    		levelUp();
+    		xp = xp - 1000;
+    	}
+    }
+    
+    public void levelUp() {
+    	level++;
     }
 }

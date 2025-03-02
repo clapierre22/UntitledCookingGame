@@ -2,17 +2,15 @@ package src.main.java.clapierre;
 
 public class Item extends Entity{
 	int rarity;
-	int level;
-	int value;
+//	User int score as Value
 	
     public Item(int x, int y){
         super(x, y);
         this.entityType = 2;
         this.pickup = true;
         this.rarity = 0;
-        this.level = 0;
-        this.value = 0;
         this.entityName = "Item Entity";
+        this.sprite = loadSprite("");
     }
     
     public void setRarity(int newRarity) {
@@ -22,11 +20,13 @@ public class Item extends Entity{
     
     public void setLevel(int newLevel) {
     	level = newLevel;
+    	adjustScore();
     }
     
     public void setValue(int newValue) {
 //    	Rarity + Level = Value (Score)
-    	value = newValue;
+//    	Used to manually set score to specific value
+    	score = newValue;
     }
     
     public int getRarity() {
@@ -38,6 +38,6 @@ public class Item extends Entity{
     }
     
     public int getValue() {
-    	return value;
+    	return score;
     }
 }

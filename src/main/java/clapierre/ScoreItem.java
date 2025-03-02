@@ -5,4 +5,10 @@ public class ScoreItem extends Item {
         super(x, y);
     }
     
+//  Score Items: Common Loonie (10 score), Rare Toonie (20 score), Epic Green Tea (50 score), Legendary Harold (100 score)
+    
+//    protected void adjustScore() {
+//    	score += (score * (level * .25));
+//    }
+//    Moved to Item.java
 }
