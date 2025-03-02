@@ -5,6 +5,7 @@ import java.awt.*;
 public class BasicEnemy extends Enemy{
     public BasicEnemy(int x, int y){
         super(x, y);
+        this.speed = 3;
     }
     
     @Override

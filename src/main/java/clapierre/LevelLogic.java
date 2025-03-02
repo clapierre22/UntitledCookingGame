@@ -1,5 +1,8 @@
 package src.main.java.clapierre;
 
+import java.awt.Rectangle;
+import java.util.List;
+
 import src.main.java.clapierre.*;
 
 public class LevelLogic {

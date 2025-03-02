@@ -1,32 +1,17 @@
 package src.main.java.clapierre;
 
-import java.util.ArrayList;
+import java.awt.image.BufferedImage;
 
-public class PlayerOne extends Entity{
-//	Weapons only
-	ArrayList<Item> inventory;
-	int score;
+import src.main.java.clapierre.*;
+
+public class PlayerOne extends Player {
 	
-    public PlayerOne(int x, int y){
-        super(x, y);
-        this.entityType = 0;
-        this.entityName = "Player One Entity";
-    }
-//    Uses key press to move around and attack
-    
-    public void pickup(Item item) {
-    	if (item instanceof WeaponItem) {
-    		inventory.add(item);
-    	}
-    	if (item instanceof ScoreItem) {
-    		score += item.getValue();
-    	}
-    	if (item instanceof HealthItem) {
-    		health += item.getHealth();
-    	}
-    }
-    
-    public boolean holds(Item item) {
-    	return inventory.contains(item);
-    }
+	public PlayerOne(int x, int y) {
+		super(x, y);
+		this.entityName = "Player One";
+		this.idleSprite = loadSprite("");
+        this.jumpSprite = loadSprite("");
+        this.attackSprite = loadSprite("");
+        this.runSprite = loadSprite("");
+	}
 }

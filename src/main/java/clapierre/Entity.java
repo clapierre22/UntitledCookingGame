@@ -1,12 +1,14 @@
 package src.main.java.clapierre;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 // Switch to Entity.java, extends to player and enemy seperately, but both have underlying entity logic anyway
 
 public class Entity {
 	String entityName;
+	BufferedImage sprite;
     int x, y, width, height;
     int velocityX, velocityY;
     int health, damage;
@@ -14,12 +16,14 @@ public class Entity {
     int entityType; 
     boolean onGround;
     boolean pickup;
-    static final int SPEED = 4;
-    static final int JUMP_POWER = -12;
+    int speed;
+//    static final int SPEED = 4;
+    static final int JUMP = -12;
     static final int GRAVITY = 1;
 
     public Entity(int x, int y) {
     	this.entityName = "Entity";
+    	this.sprite = null;
     	this.entityType = 2;
         this.x = x;
         this.y = y;
@@ -31,14 +35,15 @@ public class Entity {
         this.health = 100;
         this.damage = 10;
         this.pickup = false;
+        this.speed = 0;
     }
 
     public void moveLeft() {
-        velocityX = -SPEED;
+        velocityX = -speed;
     }
 
     public void moveRight() {
-        velocityX = SPEED;
+        velocityX = speed;
     }
 
     public void stop() {
@@ -47,7 +52,7 @@ public class Entity {
 
     public void jump() {
         if (onGround) {
-            velocityY = JUMP_POWER;
+            velocityY = JUMP;
             onGround = false;
         }
     }
@@ -67,6 +72,8 @@ public class Entity {
         y += velocityY;
 
         // Collision detection with platforms
+//        Maybe HashMap of LinkedList or HM of HM
+//        Hash the x value, find the y value and check if the rectangle exists
         for (Rectangle platform : platforms) {
             if (getBounds().intersects(platform)) {
                 if (velocityY > 0) { // Falling down
@@ -89,6 +96,13 @@ public class Entity {
 
     public void draw(Graphics g) {
         // Draw player
+    	if (sprite != null) {
+    		g.drawImage(sprite,  x,  y,  width,  height, null);
+    	}
+    	else {
+    		g.setColor(Color.RED);
+    		g.fillRect(x, y, width, height);
+    	}
     }
     
     public void setHealth(int newHealth) {
