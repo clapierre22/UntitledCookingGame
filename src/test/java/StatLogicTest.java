@@ -1,7 +1,6 @@
-package src.test.java.clapierre;
+package src.test.java;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import src.main.java.clapierre.*;
@@ -61,15 +60,16 @@ public class StatLogicTest {
     	BasicEnemy basic = new BasicEnemy(1, 1);
     	Boss boss = new Boss(1, 1);
     	LootLogic l = new LootLogic();
+//    	l.setup();
     	
 //    	Test drops, basic enemies don't always drop loot
     	Item i = l.dropLoot(boss);
-    	assertFalse(i == null);
+    	assertNotNull(i);
     	Item b = null;
     	while (b == null) {
-    		l.dropLoot(basic);
+    		b = l.dropLoot(basic);
     	}
-    	assertFalse(b == null);
+    	assertNotNull(b);
     	
     	PlayerOne player1 = new PlayerOne(1, 1);
     	
@@ -88,5 +88,41 @@ public class StatLogicTest {
     	
     	player1.pickup(b);
     	assertTrue(player1.holds(b));
+    	
+    	Item tempItem = null;
+//    	Should be ~50 for both
+    	int numTimesCom = 0;
+    	int numTimesScore = 0;
+    	for (int j = 0; j < 100; j++) {
+    		tempItem = l.dropLoot(boss);
+    		if (tempItem instanceof Baguette || tempItem instanceof SharpenedWoodenSpoon || tempItem instanceof Loonie) {
+    			numTimesCom++;
+    		}
+    		if (tempItem instanceof ScoreItem) {
+    			numTimesScore++;
+    		}
+    		tempItem = null;
+    	}
+    	System.out.println("# of Common Items: " + numTimesCom);
+    	System.out.println("# of Score Items: " + numTimesScore);
+    	
+    	tempItem = null;
+//    	Should be ~25
+    	int numDrops = 0;
+    	for (int x = 0; x < 100; x++) {
+    		tempItem = l.dropLoot(basic);
+    		if (tempItem != null) {
+    			numDrops++;
+    			tempItem = null;
+    		}
+    	}
+    	System.out.println("# of Dropped Items: " + numDrops);
+    }
+    
+    public static void main(String[] args) {
+        StatLogicTest test = new StatLogicTest();
+        test.testFightingLogic();
+        test.testLootLogic();
+        System.out.println("All tests completed.");
     }
 }

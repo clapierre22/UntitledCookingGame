@@ -165,4 +165,8 @@ public class Entity {
     	return y;
     }
     
+    public int getLevel() {
+    	return level;
+    }
+    
 }

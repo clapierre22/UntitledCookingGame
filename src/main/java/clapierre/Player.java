@@ -2,6 +2,7 @@ package src.main.java.clapierre;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Player extends Entity{
 //	Weapons only
@@ -23,6 +24,7 @@ public class Player extends Entity{
         this.jumpSprite = null;
         this.attackSprite = null;
         this.runSprite = null;
+        this.inventory = new ArrayList<>();
     }
 //    Uses key press to move around and attack
     
