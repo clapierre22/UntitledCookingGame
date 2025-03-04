@@ -14,7 +14,7 @@ public class Entity {
     int health, damage;
 //    0: Player, 1: Enemy, 2: Item
     int entityType, level, score; 
-    boolean onGround;
+    boolean onGround, facingRight;
     boolean pickup;
     int speed;
 //    static final int SPEED = 4;
@@ -38,6 +38,7 @@ public class Entity {
         this.speed = 0;
         this.level = 1;
         this.score = 0;
+        this.facingRight = false;
     }
 
     public void moveLeft() {
@@ -169,4 +170,7 @@ public class Entity {
     	return level;
     }
     
+    public boolean facingRight() {
+    	return facingRight;
+    }
 }

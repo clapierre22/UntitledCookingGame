@@ -8,6 +8,7 @@ public class Player extends Entity{
 //	Weapons only
 	List<Item> inventory;
 	int score, xp;
+	boolean holdsWeapon;
 	
 	BufferedImage idleSprite;
 	BufferedImage jumpSprite;
@@ -25,12 +26,15 @@ public class Player extends Entity{
         this.attackSprite = null;
         this.runSprite = null;
         this.inventory = new ArrayList<>();
+        this.facingRight = true;
+        this.holdsWeapon = false;
     }
 //    Uses key press to move around and attack
     
     public void pickup(Item item) {
     	if (item instanceof WeaponItem) {
     		inventory.add(item);
+    		holdsWeapon = true;
     	}
     	if (item instanceof ScoreItem) {
     		score += item.getValue();
@@ -42,6 +46,10 @@ public class Player extends Entity{
     
     public boolean holds(Item item) {
     	return inventory.contains(item);
+    }
+    
+    public boolean holdsWeapon() {
+    	return holdsWeapon;
     }
     
     public void progression(int xpEarned) {
