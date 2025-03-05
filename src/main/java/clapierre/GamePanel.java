@@ -29,7 +29,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		platforms = new ArrayList<>();
 		platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
 		
-		platforms.add(new Rectangle(150, 350, 200, 20));
+//		Test platform
+//		platforms.add(new Rectangle(150, 350, 200, 20));
 		
 		if (!platforms.isEmpty()) {
 			System.out.println("Platforms Generated, # of Platforms: " + platforms.size());
@@ -74,13 +75,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		// Draw player
+		// Draw platforms
 		super.paintComponent(g);
 		g.setColor(Color.GREEN);
 		for (Rectangle platform : platforms) {
 			g.fillRect(platform.x, platform.y, platform.width, platform.height);
 		}
 		
+//		This is to draw the test characters, to be replaced with sprite logic
 		g.setColor(Color.RED);
 		g.fillRect(player1.getX(), player1.getY(), player1.width, player1.height);
 		
