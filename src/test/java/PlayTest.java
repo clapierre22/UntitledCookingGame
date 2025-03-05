@@ -1,4 +1,4 @@
-package src.test.java.clapierre;
+package test.java;
 
 public class PlayTest {
 	// Used to run the final development, comes with specific instructions to test

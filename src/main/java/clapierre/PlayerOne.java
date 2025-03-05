@@ -2,7 +2,7 @@ package main.java.clapierre;
 
 import java.awt.image.BufferedImage;
 
-import src.main.java.clapierre.*;
+import main.java.clapierre.*;
 
 public class PlayerOne extends Player {
 

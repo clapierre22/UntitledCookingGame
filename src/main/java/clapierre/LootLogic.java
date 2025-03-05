@@ -2,7 +2,7 @@ package main.java.clapierre;
 
 import java.util.*;
 
-import src.main.java.clapierre.*;
+import main.java.clapierre.*;
 
 public class LootLogic {
 	HashMap<Integer, List<Item>> possibleItems;

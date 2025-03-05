@@ -1,6 +1,6 @@
 package main.java.clapierre;
 
-import main.java.clapierre.*;
+//import main.java.clapierre.*;
 
 public class FightingLogic {
 	public FightingLogic() {
@@ -28,37 +28,40 @@ public class FightingLogic {
 		}
 		return false;
 	}
+	
+	public void calculateFightDebug(Entity entityAttackFrom, Entity entityAttackTo) {
+		if (calculateHit(entityAttackFrom, entityAttackTo)) {
+			System.out.println("Original Health: " + entityAttackTo.getHealth());
+			entityAttackTo.setHealth(entityAttackTo.getHealth() - entityAttackFrom.getDamage());
+			System.out.println("Damage " + entityAttackFrom.getDamage());
+			System.out.println("Adjusted Health " + entityAttackTo.getHealth());
+		}
+	}
 
 	public boolean calculateHitDebug(Entity entityAttackFrom, Entity entityAttackTo) {
-		// Get positions
-		int attackFromX = entityAttackFrom.getX();
-		int attackFromY = entityAttackFrom.getY();
-		int attackToX = entityAttackTo.getX();
-		int attackToY = entityAttackTo.getY();
+	    int attackFromX = entityAttackFrom.getX();
+	    int attackFromY = entityAttackFrom.getY();
+	    int attackToX = entityAttackTo.getX();
+	    int attackToY = entityAttackTo.getY();
+	    boolean facingRight = entityAttackFrom.facingRight();
 
-		// Get facing direction
-		boolean facingRight = entityAttackFrom.facingRight();
+	    System.out.println("Attacker Position: (" + attackFromX + ", " + attackFromY + ")");
+	    System.out.println("Target Position: (" + attackToX + ", " + attackToY + ")");
+	    System.out.println("Attacker Facing Right: " + facingRight);
 
-		// Debugging logs
-		System.out.println("Attacker Position: (" + attackFromX + ", " + attackFromY + ")");
-		System.out.println("Target Position: (" + attackToX + ", " + attackToY + ")");
-		System.out.println("Attacker Facing Right: " + facingRight);
+	    boolean withinXRange = Math.abs(attackFromX - attackToX) <= 40;
+	    boolean withinYRange = Math.abs(attackFromY - attackToY) <= 20;
+	    boolean correctDirection = (facingRight && attackFromX < attackToX)
+	            || (!facingRight && attackFromX > attackToX);
 
-		// Check if within range
-		boolean withinXRange = Math.abs(attackFromX - attackToX) <= 40;
-		boolean withinYRange = Math.abs(attackFromY - attackToY) <= 20;
-		boolean correctDirection = (facingRight && attackFromX < attackToX)
-				|| (!facingRight && attackFromX > attackToX);
+	    System.out.println("Within X Range: " + withinXRange);
+	    System.out.println("Within Y Range: " + withinYRange);
+	    System.out.println("Correct Direction: " + correctDirection);
 
-		System.out.println("Within X Range: " + withinXRange);
-		System.out.println("Within Y Range: " + withinYRange);
-		System.out.println("Correct Direction: " + correctDirection);
-
-		if (withinXRange && withinYRange && correctDirection) {
-			return true;
-		}
-
-		return false;
+	    boolean hit = withinXRange && withinYRange && correctDirection;
+	    System.out.println("Hit: " + hit);
+	    return hit;
 	}
+
 
 }

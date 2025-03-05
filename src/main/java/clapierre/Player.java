@@ -64,4 +64,8 @@ public class Player extends Entity {
 	public void levelUp() {
 		level++;
 	}
+	
+	public void clearInventory() {
+		inventory.clear();
+	}
 }

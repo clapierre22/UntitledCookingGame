@@ -169,6 +169,10 @@ public class Entity {
 	public int getLevel() {
 		return level;
 	}
+	
+	public void setDirection(boolean right) {
+		facingRight = right;
+	}
 
 	public boolean facingRight() {
 		return facingRight;

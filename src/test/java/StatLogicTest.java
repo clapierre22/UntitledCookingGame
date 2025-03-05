@@ -51,16 +51,22 @@ public class StatLogicTest {
 
 //    	Missed attack by the player
 		player1.setDamage(100);
+		assertEquals(100, player1.getDamage());
+		
 		f.calculateFight(player1, entity);
 		assertEquals(500, entity.getHealth());
+		
+		player1.setDirection(true);
+		assertTrue(player1.facingRight());
 
 //    	Successful attack by the player
-		entity.setPosition(90, 100);
-		assertEquals(90, entity.getX());
+		entity.setPosition(110, 100);
+		assertEquals(110, entity.getX());
 		assertEquals(100, entity.getY());
 		f.calculateFight(player1, entity);
-		assertTrue(f.calculateHitDebug(player1, entity));
-//    	^^ ERROR HERE
+//		assertTrue(f.calculateHitDebug(player1, entity));
+//    	^^ FIXED THANK GOD
+//		f.calculateFightDebug(player1, entity);
 		assertEquals(400, entity.getHealth());
 //    	^ Error here, 500 when expected 400
 
@@ -92,6 +98,7 @@ public class StatLogicTest {
 		assertNotNull(b);
 
 		PlayerOne player1 = new PlayerOne(1, 1);
+		player1.clearInventory();
 
 //    	Players can only hold onto weapons (health and score used instantly)
 		while (!(i instanceof WeaponItem)) {
