@@ -1,9 +1,12 @@
 package main.java.clapierre;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Level {
+//	Make platforms a linked list: platforms are generated and drawn in order
 	private List<Rectangle> platforms;
 	private Rectangle goal, bossSpawn;
 	private Rectangle player1Spawn, player2Spawn;
@@ -13,7 +16,7 @@ public class Level {
 	public Level(List<Rectangle> platforms, Rectangle goal) {
 		this.platforms = platforms;
 		this.goal = goal;
-		int levelNum = 0;
+		this.levelNum = 0;
 	}
 
 	public List<Rectangle> getPlatforms() {

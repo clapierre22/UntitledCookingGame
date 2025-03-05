@@ -29,12 +29,17 @@ public class GamePanel extends JPanel implements ActionListener {
 		platforms = new ArrayList<>();
 		platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
 		
-//		Test platform
-//		platforms.add(new Rectangle(150, 350, 200, 20));
-		
 		if (!platforms.isEmpty()) {
 			System.out.println("Platforms Generated, # of Platforms: " + platforms.size());
 		}
+		
+		LevelLogic ll = new LevelLogic();
+		Level testLevel = ll.generateLevel();
+		
+		platforms.addAll(testLevel.getPlatforms());
+		
+//		Test platform
+//		platforms.add(new Rectangle(150, 350, 200, 20));
 
 		// 60 FPS
 		timer = new Timer(16, this);
