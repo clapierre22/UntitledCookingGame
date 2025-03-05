@@ -16,6 +16,7 @@ public class Entity {
 	int entityType, level, score;
 	boolean onGround, facingRight;
 	boolean pickup;
+	boolean holdsWeapon;
 	int speed;
 //    static final int SPEED = 4;
 	static final int JUMP = -12;
@@ -39,6 +40,7 @@ public class Entity {
 		this.level = 1;
 		this.score = 0;
 		this.facingRight = false;
+		this.holdsWeapon = false;
 	}
 
 	public void moveLeft() {
@@ -176,5 +178,9 @@ public class Entity {
 
 	public boolean facingRight() {
 		return facingRight;
+	}
+	
+	public boolean holdsWeapon() {
+		return holdsWeapon;
 	}
 }

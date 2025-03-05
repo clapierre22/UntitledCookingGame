@@ -64,16 +64,19 @@ public class StatLogicTest {
 		assertEquals(110, entity.getX());
 		assertEquals(100, entity.getY());
 		f.calculateFight(player1, entity);
-//		assertTrue(f.calculateHitDebug(player1, entity));
+		assertTrue(f.calculateHitDebug(player1, entity));
 //    	^^ FIXED THANK GOD
 //		f.calculateFightDebug(player1, entity);
 		assertEquals(400, entity.getHealth());
-//    	^ Error here, 500 when expected 400
 
 //    	Player picks up weapon, damage taken by Enemy should equal item damage
 		player1.pickup(weapon);
-		f.calculateFight(player1, entity);
+		assertTrue(player1.holdsWeapon());
+		assertTrue(player1.holds(weapon));
+		
+		f.calculateFightDebug(player1, entity);
 		assertEquals(200, entity.getHealth());
+//		^ Fixed
 
 //    	Successful attack by Enemy
 		entity.setDamage(50);

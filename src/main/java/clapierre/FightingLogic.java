@@ -11,7 +11,12 @@ public class FightingLogic {
 //		Get player weapon/player or entity damage, apply damage to entityAttack if calculateHit
 		if (calculateHit(entityAttackFrom, entityAttackTo)) {
 //			Need to add grabbing weapon functionality
-			entityAttackTo.setHealth(entityAttackTo.getHealth() - entityAttackFrom.getDamage());
+			if (entityAttackFrom.holdsWeapon()) {
+				entityAttackTo.setHealth(entityAttackTo.getHealth() - ((Player) entityAttackFrom).getWeapon().getDamage());
+			}
+			else {
+				entityAttackTo.setHealth(entityAttackTo.getHealth() - entityAttackFrom.getDamage());
+			}
 //			if EAT.health <= 0, kill entity. This may need additional logic, right now worry about health calculations
 		}
 	}
@@ -32,8 +37,16 @@ public class FightingLogic {
 	public void calculateFightDebug(Entity entityAttackFrom, Entity entityAttackTo) {
 		if (calculateHit(entityAttackFrom, entityAttackTo)) {
 			System.out.println("Original Health: " + entityAttackTo.getHealth());
-			entityAttackTo.setHealth(entityAttackTo.getHealth() - entityAttackFrom.getDamage());
-			System.out.println("Damage " + entityAttackFrom.getDamage());
+			if (entityAttackFrom.holdsWeapon()) {
+				System.out.println("Entity holds Weapon");
+				System.out.println("Damage " + ((Player) entityAttackFrom).getWeapon().getDamage());
+				entityAttackTo.setHealth(entityAttackTo.getHealth() - ((Player) entityAttackFrom).getWeapon().getDamage());
+			}
+			else {
+				System.out.println("No weapon detected");
+				System.out.println("Damage " + entityAttackFrom.getDamage());
+				entityAttackTo.setHealth(entityAttackTo.getHealth() - entityAttackFrom.getDamage());
+			}
 			System.out.println("Adjusted Health " + entityAttackTo.getHealth());
 		}
 	}
