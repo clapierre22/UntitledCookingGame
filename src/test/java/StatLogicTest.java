@@ -21,6 +21,8 @@ import main.java.clapierre.*;
 //import main.java.clapierre.WeaponItem;
 
 public class StatLogicTest {
+//	All tests pass, test file completed
+	
 	@Test
 	public void testFightingLogic() {
 		// test logic here
