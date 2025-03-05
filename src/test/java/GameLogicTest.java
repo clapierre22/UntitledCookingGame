@@ -49,4 +49,9 @@ public class GameLogicTest {
 		assertEquals(boss.getY(), currentLevel.getBossSpawn().y);
 		
 	}
+	
+	@Test
+	public void runTest() {
+//		Used to run a predefined script to move the player and enemy characters around and check that the x,y is the same as the intended end point
+	}
 }
