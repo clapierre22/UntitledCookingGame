@@ -12,7 +12,7 @@ import javax.swing.*;
 public class GamePanel extends JPanel implements ActionListener {
 	static final int WIDTH = 800, HEIGHT = 600;
 	
-	static final int FLOORY = 400;
+	static final int FLOORY = 450;
 	
 	PlayerOne player1;
 	PlayerTwo player2;
@@ -57,6 +57,9 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_D) {
 					player1.stop();
 				}
+				if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					player2.stop();
+				}
 			}
 		});
 		setFocusable(true);
@@ -79,9 +82,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		
 		g.setColor(Color.RED);
-		g.fillRect(player1.getX(), player1.getY(), player1.width, player1.width);
+		g.fillRect(player1.getX(), player1.getY(), player1.width, player1.height);
 		
 		g.setColor(Color.BLUE);
-		g.fillRect(player2.getX(), player2.getY(), player2.width, player2.width);
+		g.fillRect(player2.getX(), player2.getY(), player2.width, player2.height);
 	}
 }
