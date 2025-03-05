@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class FryingPan extends WeaponItem {
 	public FryingPan(int x, int y) {

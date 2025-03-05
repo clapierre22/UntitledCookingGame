@@ -1,13 +1,13 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
-public class PlayerTwo extends Player{
-    public PlayerTwo(int x, int y){
-        super(x, y);
+public class PlayerTwo extends Player {
+	public PlayerTwo(int x, int y) {
+		super(x, y);
 		this.entityName = "Player Two";
 		this.idleSprite = loadSprite("");
-        this.jumpSprite = loadSprite("");
-        this.attackSprite = loadSprite("");
-        this.runSprite = loadSprite("");
-    }
-    // Different controlls, can hold different items, etc.
+		this.jumpSprite = loadSprite("");
+		this.attackSprite = loadSprite("");
+		this.runSprite = loadSprite("");
+	}
+	// Different controlls, can hold different items, etc.
 }

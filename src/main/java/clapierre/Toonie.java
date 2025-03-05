@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class Toonie extends ScoreItem {
 	public Toonie(int x, int y) {

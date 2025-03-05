@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class SilverSpoon extends WeaponItem {
 	public SilverSpoon(int x, int y) {

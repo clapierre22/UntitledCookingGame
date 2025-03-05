@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class KitchenKnife extends WeaponItem {
 	public KitchenKnife(int x, int y) {

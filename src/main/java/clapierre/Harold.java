@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class Harold extends ScoreItem {
 	public Harold(int x, int y) {

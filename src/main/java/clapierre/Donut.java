@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class Donut extends HealthItem {
 	public Donut(int x, int y) {

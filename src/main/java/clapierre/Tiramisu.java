@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class Tiramisu extends HealthItem {
 	public Tiramisu(int x, int y) {

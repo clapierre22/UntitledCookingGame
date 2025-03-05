@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class ApplePie extends HealthItem {
 	public ApplePie(int x, int y) {

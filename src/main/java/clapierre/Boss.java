@@ -1,9 +1,9 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class Boss extends Enemy {
-    public Boss(int x, int y){
-        super(x, y);
-        this.speed = 2;
-    }
-    
+	public Boss(int x, int y) {
+		super(x, y);
+		this.speed = 2;
+	}
+
 }

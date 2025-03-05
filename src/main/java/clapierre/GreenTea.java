@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class GreenTea extends ScoreItem {
 	public GreenTea(int x, int y) {

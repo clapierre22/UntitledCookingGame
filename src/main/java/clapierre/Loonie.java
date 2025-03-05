@@ -1,4 +1,4 @@
-package src.main.java.clapierre;
+package main.java.clapierre;
 
 public class Loonie extends ScoreItem {
 	public Loonie(int x, int y) {
