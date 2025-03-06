@@ -122,6 +122,7 @@ public class StatLogicTest {
 		assertTrue(player1.holds(b));
 
 		Item tempItem = null;
+//		Testing the item drop rate formulas
 //    	Should be ~50 for both
 		int numTimesCom = 0;
 		int numTimesScore = 0;
