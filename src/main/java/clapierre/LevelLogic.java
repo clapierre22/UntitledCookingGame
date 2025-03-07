@@ -9,14 +9,27 @@ import main.java.clapierre.*;
 
 public class LevelLogic {
 	public List<Rectangle> platforms;
+//	Taken from GamePanel
+	int width, height;
 	
-	public LevelLogic() {
+	public LevelLogic(int width, int height) {
 //		Creates and generates each level, also generates level continuation
+//		Could be linked list, but generated problems with entity ground detection. Array for now
 		this.platforms = new ArrayList<>();
+		this.width = width;
+		this.height = height;
 	}
 
 	public Level generateLevel() {
 //		Creates a list of Rectangles that still leave enough space to move around
+		
+//		MAJOR CHANGE: 
+//		Flat level, but when the level finishes (all enemies killed) it then allows the camera to move to the next place which is stairs up to another 
+//		flat level, change the platform generation to be more even, less stair-like
+		
+//		Add:
+//		Add chests that spawn right before boss (health) and at specific loot islands (anything)
+//		Add shop to buy health with score (or currency)
 		
 //		RULES:
 //		Players spawn on the floor (y = ymax), all levels involve climbing up to the boss in some way
@@ -29,22 +42,82 @@ public class LevelLogic {
 		
 		platforms.clear();
 		
-		int stdWidth = 100, stdHeight = 20;
-		int curX = 100, curY = 400;
+		int stdWidth = 200, stdHeight = 10;
+		int curX = width/2, curY = 400;
+		
+//		New Version - Set Generation
+//		Note from GamePanel: (0,0) == Top Left Corner
+		
+		double type = Math.random();
+//		1 = Platform, 0 = None (Platforms next to each other still have space between to jump through)
+//		Note: Maybe make one slightly more common than the other? (if so, most likely grid)
+		if (type > .75) {
+//			GRID
+//			10101
+//			01010
+//			10101
+//			01010
+//			10101
+//			Floor
+			
+		}
+		else if (.75 > type && type > .5) {
+//			TOWER
+//			00100
+//			01010
+//			10101
+//			11011
+//			11111
+//			Floor
+			
+		}
+		else if (.5 > type && type > .25) {
+//			EX
+//			10001
+//			01010
+//			00100
+//			01010
+//			10001
+//			Floor
+			
+		}
+		else {
+//			CIRCLE
+//			00100
+//			01010
+//			10101
+//			01010
+//			00100
+//			Floor
+			
+			
+		}		
+		
+//		Old Version - completely random generation
 		
 //		Currently spawns 10 platforms, will need adjustments
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 40; i++) {
 			if (platforms.isEmpty()) {
 				platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
 			}
 			else {
-//				Rectangle lastRec = platforms.getLast();		
+//				Rectangle lastRec = platforms.getLast();
+//				Need to fix, still a little rough
+//				Maybe use fixed layouts with random chance for each one to spawn to ensure good level design
 				if (Math.random() > .25) {
-					curX += (100 * Math.random());
+					if (Math.random() > .5) {
+						curX += (100 * Math.random());
+					}
+					else {
+//						No longer generates as a stair
+						curX -= (100 * Math.random());
+					}
 				}
-				if (Math.random() > .5) {
+				if (Math.random() > .9) {
 //					60 is set because it is current player height (3/5/25)
-					curY -= Math.max(60, (120 * Math.random()));
+//					^ Adjusted to 70 to be slightly above player height (prevents snapping to higher platforms when falling)
+//					curY -= Math.max(60, (120 * Math.random()));
+					curY -= 70;
 				}
 				platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
 			}

@@ -15,7 +15,7 @@ public class GameLogicTest {
 	public void levelLogicTest() {
 //		Check all level platforms spawn, with spawn points in valid positions (on top of platforms) << This last part moved to spawnLogicTest(), as platforms spawn differently from other entities
 //		Includes visual test to make sure the generated levels look okay
-		LevelLogic ll = new LevelLogic();
+		LevelLogic ll = new LevelLogic(800, 600);
 		try {
 			Level currentLevel = ll.generateLevel();
 		}
@@ -32,7 +32,7 @@ public class GameLogicTest {
 	public void spawnLogicTest() {
 //		Test entity spawn, including the Item entities
 //		Item entities should spawn at the same y level that is halfway up the player sprite (prevents spawning in or below ground)
-		LevelLogic ll = new LevelLogic();
+		LevelLogic ll = new LevelLogic(800, 600);
 		Level currentLevel = ll.generateLevel();
 		
 		SpawnLogic sl = new SpawnLogic(currentLevel);

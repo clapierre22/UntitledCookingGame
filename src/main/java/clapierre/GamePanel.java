@@ -11,8 +11,10 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements ActionListener {
 	static final int WIDTH = 800, HEIGHT = 600;
+//	(0,0) == Top Left Corner
 	
-	static final int FLOORY = 450;
+//	Height of the floor, gives some room for later implementation of visual stats for players
+	static final int FLOORY = 470;
 	
 	PlayerOne player1;
 	PlayerTwo player2;
@@ -33,7 +35,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			System.out.println("Platforms Generated, # of Platforms: " + platforms.size());
 		}
 		
-		LevelLogic ll = new LevelLogic();
+		LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
 		Level testLevel = ll.generateLevel();
 		
 		platforms.addAll(testLevel.getPlatforms());
