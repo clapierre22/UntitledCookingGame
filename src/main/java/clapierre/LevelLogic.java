@@ -152,7 +152,8 @@ public class LevelLogic {
 	private List<Rectangle> generateEnemySpawn() {
 		for (Rectangle platform : platforms) {
 			if (Math.random() > .5) {
-				enemySpawn.add(new Rectangle(platform.x, platform.y, stdWidth, stdHeight));
+//				First two constructors of rectangle are still testing, will have concrete variables in future
+				enemySpawn.add(new Rectangle(platform.x + (stdWidth/2), platform.y - 60, stdWidth, stdHeight));
 			}
 		}
 		return enemySpawn;
