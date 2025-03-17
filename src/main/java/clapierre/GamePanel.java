@@ -34,6 +34,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		platforms = new ArrayList<>();
 		platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
 		
+		enemies = new ArrayList<>();
+		
 		if (!platforms.isEmpty()) {
 			System.out.println("Platforms Generated, # of Platforms: " + platforms.size());
 		}

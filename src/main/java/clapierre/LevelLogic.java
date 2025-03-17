@@ -18,6 +18,7 @@ public class LevelLogic {
 //		Creates and generates each level, also generates level continuation
 //		Could be linked list, but generated problems with entity ground detection. Array for now
 		this.platforms = new ArrayList<>();
+		this.enemySpawn = new ArrayList<>();
 		this.width = width;
 		this.height = height;
 	}
@@ -141,7 +142,7 @@ public class LevelLogic {
 		}		
 		
 		Rectangle goal = new Rectangle(GamePanel.WIDTH - 10, GamePanel.FLOORY, 40, 80);
-		return new Level(platforms, goal);
+		return new Level(platforms, goal, generateEnemySpawn());
 	}
 
 	private List<Rectangle> generatePlayerSpawn() {

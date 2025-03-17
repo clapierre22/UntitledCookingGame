@@ -10,13 +10,14 @@ public class Level {
 	private List<Rectangle> platforms;
 	private Rectangle goal, bossSpawn;
 	private Rectangle player1Spawn, player2Spawn;
-	private List<Rectangle> enemySpawn;
+	public List<Rectangle> enemySpawn;
 	int levelNum;
 
-	public Level(List<Rectangle> platforms, Rectangle goal) {
+	public Level(List<Rectangle> platforms, Rectangle goal, List<Rectangle> enemySpawn) {
 		this.platforms = platforms;
 		this.goal = goal;
 		this.levelNum = 0;
+		this.enemySpawn = enemySpawn;
 	}
 
 	public List<Rectangle> getPlatforms() {
