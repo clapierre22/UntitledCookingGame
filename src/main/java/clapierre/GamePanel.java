@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
 
@@ -18,6 +19,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	PlayerOne player1;
 	PlayerTwo player2;
+	
+	static List<Enemy> enemies;
 	
 	List<Rectangle> platforms;
 	Timer timer;
@@ -39,6 +42,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		Level testLevel = ll.generateLevel();
 		
 		platforms.addAll(testLevel.getPlatforms());
+		
+		for (Rectangle spawn : testLevel.getEnemySpawn()) {
+			enemies.add(new Enemy(spawn.x, spawn.y));
+		}
 		
 //		Test platform
 //		platforms.add(new Rectangle(150, 350, 200, 20));
@@ -89,6 +96,14 @@ public class GamePanel extends JPanel implements ActionListener {
 			g.fillRect(platform.x, platform.y, platform.width, platform.height);
 		}
 		
+//		Draws test enemies
+		g.setColor(Color.ORANGE);
+		if (!GamePanel.enemies.isEmpty()) {
+			for (Enemy enemy : GamePanel.enemies) {
+				g.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+			}
+		}
+		
 //		This is to draw the test characters, to be replaced with sprite logic
 		g.setColor(Color.RED);
 		g.fillRect(player1.getX(), player1.getY(), player1.width, player1.height);
@@ -96,4 +111,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		g.setColor(Color.BLUE);
 		g.fillRect(player2.getX(), player2.getY(), player2.width, player2.height);
 	}
+	
+//	public LinkedList<Enemy> listEnemy() {
+//		
+//	}
 }

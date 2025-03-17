@@ -9,8 +9,10 @@ import main.java.clapierre.*;
 
 public class LevelLogic {
 	public List<Rectangle> platforms;
+	List<Rectangle> enemySpawn;
 //	Taken from GamePanel
 	int width, height;
+	int stdWidth = 200, stdHeight = 10;
 	
 	public LevelLogic(int width, int height) {
 //		Creates and generates each level, also generates level continuation
@@ -42,7 +44,7 @@ public class LevelLogic {
 		
 		platforms.clear();
 		
-		int stdWidth = 200, stdHeight = 10;
+//		int stdWidth = 200, stdHeight = 10;
 		int curX = 0, curY = 95;
 		
 //		New Version - Set Generation
@@ -79,22 +81,10 @@ public class LevelLogic {
 //			01010
 //			10101
 //			11011
-//			11111
+//			10101
 //			Floor
 			
-//			All functions are GRID
 			for (int i = 0; i < 5; i++) {
-//				while (!edge) {
-//					platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
-////					Pull incremental values from WIDTH/5 in future version
-//					curX += width/5;
-////					Currently no gaps on side, but needs to be evenly spaced
-//					if (width == (curX + stdWidth)) {
-//						edge = true;
-//						curX = 0;
-//					}
-//				}
-//				curY += 70;	
 				for (int j = 0; j < 5; j++) {
 			        if ((i + j) % 2 == 0) {
 			            platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
@@ -135,51 +125,22 @@ public class LevelLogic {
 //			Floor
 			
 			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < 5; j++) {
-			        if ((i + j) % 2 == 0) {
-			            platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
-			        }
-			        curX += GamePanel.WIDTH / 5;
-			    }
+				switch(i) {
+//				Only need one loop, add statements within the case switch
+//				0,4: Top and base layer, spawns one platform in the middle
+				case 0, 4 -> platforms.add(new Rectangle(GamePanel.WIDTH / 2, curY, stdWidth, stdHeight));
+//				1,3: Spawns two platforms evenly spaced
+				case 1, 3 -> platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
+//				Middle, Spawns same as Grid middle
+				case 2 -> platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
+				}
+			    curX += GamePanel.WIDTH / 5;
 			    curX = 0;
 			    curY += 75;
 			}
 		}		
 		
-//		Old Version - completely random generation
-		
-//		Currently spawns 10 platforms, will need adjustments
-//		for (int i = 0; i < 40; i++) {
-//			if (platforms.isEmpty()) {
-//				platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
-//			}
-//			else {
-////				Rectangle lastRec = platforms.getLast();
-////				Need to fix, still a little rough
-////				Maybe use fixed layouts with random chance for each one to spawn to ensure good level design
-//				if (Math.random() > .25) {
-//					if (Math.random() > .5) {
-//						curX += (100 * Math.random());
-//					}
-//					else {
-////						No longer generates as a stair
-//						curX -= (100 * Math.random());
-//					}
-//				}
-//				if (Math.random() > .9) {
-////					60 is set because it is current player height (3/5/25)
-////					^ Adjusted to 70 to be slightly above player height (prevents snapping to higher platforms when falling)
-////					curY -= Math.max(60, (120 * Math.random()));
-//					curY -= 70;
-//				}
-//				platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
-//			}
-//		}
-		
-//		Call generatePlayerSpawn and generateEnemySpawn here
-		
-//		Find the highest platform, attach goal to that platform
-		Rectangle goal = new Rectangle();
+		Rectangle goal = new Rectangle(GamePanel.WIDTH - 10, GamePanel.FLOORY, 40, 80);
 		return new Level(platforms, goal);
 	}
 
@@ -188,7 +149,16 @@ public class LevelLogic {
 	}
 
 	private List<Rectangle> generateEnemySpawn() {
-		return null;
+		for (Rectangle platform : platforms) {
+			if (Math.random() > .5) {
+				enemySpawn.add(new Rectangle(platform.x, platform.y, stdWidth, stdHeight));
+			}
+		}
+		return enemySpawn;
 	}
+	
+//	private Rectangle generateExit() {
+//		return null;
+//	}
 
 }
