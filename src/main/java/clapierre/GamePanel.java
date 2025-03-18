@@ -28,10 +28,13 @@ public class GamePanel extends JPanel implements ActionListener {
 	public GamePanel() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setBackground(Color.CYAN);
+		
+//		Redundant use player outside of level logic, will use playerSpawn in future
 		player1 = new PlayerOne(100, 300);
 		player2 = new PlayerTwo(200, 300);
 		
 		platforms = new ArrayList<>();
+//		Floor
 		platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
 		
 		enemies = new ArrayList<>();

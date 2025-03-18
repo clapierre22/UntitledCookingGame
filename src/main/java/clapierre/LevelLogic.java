@@ -10,6 +10,7 @@ import main.java.clapierre.*;
 public class LevelLogic {
 	public List<Rectangle> platforms;
 	List<Rectangle> enemySpawn;
+	List<Rectangle> playerSpawn;
 //	Taken from GamePanel
 	int width, height;
 	int stdWidth = 200, stdHeight = 10;
@@ -125,6 +126,7 @@ public class LevelLogic {
 //			00100
 //			Floor
 			
+//			Broken, only spawns half the platforms
 			for (int i = 0; i < 5; i++) {
 				switch(i) {
 //				Only need one loop, add statements within the case switch
@@ -146,10 +148,15 @@ public class LevelLogic {
 	}
 
 	private List<Rectangle> generatePlayerSpawn() {
-		return null;
+//		Both players spawn on floor in bottom left corner of screen
+		playerSpawn.add(new Rectangle(10, GamePanel.FLOORY, stdWidth, stdHeight));
+		playerSpawn.add(new Rectangle(20, GamePanel.FLOORY, stdWidth, stdHeight));
+		
+		return playerSpawn;
 	}
 
 	private List<Rectangle> generateEnemySpawn() {
+//		For each platform ~50% chance to spawn an enemy 
 		for (Rectangle platform : platforms) {
 			if (Math.random() > .5) {
 //				First two constructors of rectangle are still testing, will have concrete variables in future
