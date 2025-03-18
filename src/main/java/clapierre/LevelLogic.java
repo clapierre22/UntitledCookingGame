@@ -14,6 +14,7 @@ public class LevelLogic {
 //	Taken from GamePanel
 	int width, height;
 	int stdWidth = 200, stdHeight = 10;
+	Rectangle goal;
 	
 	public LevelLogic(int width, int height) {
 //		Creates and generates each level, also generates level continuation
@@ -22,6 +23,7 @@ public class LevelLogic {
 		this.enemySpawn = new ArrayList<>();
 		this.width = width;
 		this.height = height;
+		this.goal = new Rectangle(GamePanel.WIDTH - 10, GamePanel.FLOORY, 40, 80);
 	}
 
 	public Level generateLevel() {
@@ -32,6 +34,7 @@ public class LevelLogic {
 //		flat level, change the platform generation to be more even, less stair-like
 		
 //		Add:
+//		Add transition level and level change
 //		Add chests that spawn right before boss (health) and at specific loot islands (anything)
 //		Add shop to buy health with score (or currency)
 		
@@ -143,7 +146,7 @@ public class LevelLogic {
 			}
 		}		
 		
-		Rectangle goal = new Rectangle(GamePanel.WIDTH - 10, GamePanel.FLOORY, 40, 80);
+//		Rectangle goal = new Rectangle(GamePanel.WIDTH - 10, GamePanel.FLOORY, 40, 80);
 		return new Level(platforms, goal, generateEnemySpawn());
 	}
 
@@ -164,6 +167,14 @@ public class LevelLogic {
 			}
 		}
 		return enemySpawn;
+	}
+	
+	public boolean atGoal(Player player1, Player player2) {
+//		Modify to ensure it is within the bounding box range, not just exact value
+		return player1.x == goal.x
+				&& player1.y == goal.y
+				&& player2.x == goal.x
+				&& player2.y == goal.y;
 	}
 	
 //	private Rectangle generateExit() {

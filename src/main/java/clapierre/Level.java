@@ -8,7 +8,7 @@ import java.util.List;
 public class Level {
 //	Make platforms a linked list: platforms are generated and drawn in order
 	private List<Rectangle> platforms;
-	private Rectangle goal, bossSpawn;
+	protected Rectangle goal, bossSpawn;
 	private Rectangle player1Spawn, player2Spawn;
 	public List<Rectangle> enemySpawn;
 	int levelNum;

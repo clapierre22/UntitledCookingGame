@@ -24,6 +24,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	List<Rectangle> platforms;
 	Timer timer;
+	
+	LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
+	Level testLevel = ll.generateLevel();
 
 	public GamePanel() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -43,8 +46,8 @@ public class GamePanel extends JPanel implements ActionListener {
 			System.out.println("Platforms Generated, # of Platforms: " + platforms.size());
 		}
 		
-		LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
-		Level testLevel = ll.generateLevel();
+//		LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
+//		Level testLevel = ll.generateLevel();
 		
 		platforms.addAll(testLevel.getPlatforms());
 		
@@ -89,6 +92,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		player1.update(platforms);
 		player2.update(platforms);
+//		Add check for both players being within the goal, which only is drawn when all enemies are dead (maybe add timer starts when both in before switching level)
+		if (ll.atGoal(player1, player2)) { // Needs atGoal() in Player.java
+//			Add change level logic, but cannot access level or level logic
+		}
 		repaint();
 	}
 
