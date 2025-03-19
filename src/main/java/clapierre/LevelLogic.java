@@ -91,13 +91,27 @@ public class LevelLogic {
 //			Floor
 			
 			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < 5; j++) {
-			        if ((i + j) % 2 == 0) {
-			            platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
-			        }
-			        curX += GamePanel.WIDTH / 5;
-			    }
-			    curX = 0;
+				switch(i) {
+				case 0 -> platforms.add(new Rectangle((GamePanel.WIDTH / 2) - (stdWidth / 2), curY, stdWidth, stdHeight));
+				case 1 -> {
+					platforms.add(new Rectangle((GamePanel.WIDTH * 1/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle((GamePanel.WIDTH * 2/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
+				}
+				case 2, 4 -> {
+//					Far Left
+					platforms.add(new Rectangle(0, curY, stdWidth, stdHeight));
+//					Middle
+					platforms.add(new Rectangle((GamePanel.WIDTH / 2) - (stdWidth / 2), curY, stdWidth, stdHeight));
+//					Far Right
+					platforms.add(new Rectangle(GamePanel.WIDTH - stdWidth, curY, stdWidth, stdHeight));
+				}
+				case 3 -> {
+					platforms.add(new Rectangle(0, curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle((GamePanel.WIDTH * 1/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle((GamePanel.WIDTH * 2/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle(GamePanel.WIDTH - stdWidth, curY, stdWidth, stdHeight));
+				}
+				}
 			    curY += 75;
 			}
 		}
@@ -111,12 +125,20 @@ public class LevelLogic {
 //			Floor
 			
 			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < 5; j++) {
-			        if ((i + j) % 2 == 0) {
-			            platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
-			        }
-			        curX += GamePanel.WIDTH / 5;
-			    }
+				switch(i) {
+				case 0, 4 -> {
+					platforms.add(new Rectangle(0, curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle(GamePanel.WIDTH - stdWidth, curY, stdWidth, stdHeight));
+					
+				}
+				case 1, 3 -> {
+					platforms.add(new Rectangle((GamePanel.WIDTH * 1/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle((GamePanel.WIDTH * 2/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
+				}
+				case 2 -> {
+					platforms.add(new Rectangle((GamePanel.WIDTH / 2) - (stdWidth / 2), curY, stdWidth, stdHeight));
+				}
+				}
 			    curX = 0;
 			    curY += 75;
 			}
@@ -130,23 +152,21 @@ public class LevelLogic {
 //			00100
 //			Floor
 			
-//			Broken, only spawns half the platforms
 			for (int i = 0; i < 5; i++) {
 				switch(i) {
 //				Only need one loop, add statements within the case switch
 //				0,4: Top and base layer, spawns one platform in the middle
-				case 0, 4 -> platforms.add(new Rectangle(GamePanel.WIDTH / 2, curY, stdWidth, stdHeight));
+				case 0, 4 -> platforms.add(new Rectangle((GamePanel.WIDTH / 2) - (stdWidth / 2), curY, stdWidth, stdHeight));
 //				1,3: Spawns two platforms evenly spaced
 				case 1, 3 -> {
-					platforms.add(new Rectangle(GamePanel.WIDTH * 1/3, curY, stdWidth, stdHeight));
-					platforms.add(new Rectangle(GamePanel.WIDTH * 2/3, curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle((GamePanel.WIDTH * 1/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle((GamePanel.WIDTH * 2/3) - (stdWidth / 2), curY, stdWidth, stdHeight));
 				}
 //				Middle, Spawns same as Grid middle
 				case 2 -> {
-					platforms.add(new Rectangle(GamePanel.WIDTH * 1/5, curY, stdWidth, stdHeight));
-					platforms.add(new Rectangle(GamePanel.WIDTH * 3/5, curY, stdWidth, stdHeight));
-					platforms.add(new Rectangle(GamePanel.WIDTH, curY, stdWidth, stdHeight));
-					
+					platforms.add(new Rectangle(0, curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle((GamePanel.WIDTH / 2) - (stdWidth / 2), curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle(GamePanel.WIDTH - stdWidth, curY, stdWidth, stdHeight));
 				}
 				}
 //			    curX += GamePanel.WIDTH / 5;

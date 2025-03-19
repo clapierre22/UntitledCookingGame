@@ -71,9 +71,12 @@ public class GamePanel extends JPanel implements ActionListener {
 					case KeyEvent.VK_LEFT -> player2.moveLeft();
 					case KeyEvent.VK_RIGHT -> player2.moveRight();
 					case KeyEvent.VK_UP -> player2.jump();
+					case KeyEvent.VK_DOWN -> player2.drop();
+					
 					case KeyEvent.VK_A -> player1.moveLeft();
 					case KeyEvent.VK_D -> player1.moveRight();
 					case KeyEvent.VK_W -> player1.jump();
+					case KeyEvent.VK_S -> player1.drop();
 				}
 			}
 

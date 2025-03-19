@@ -17,7 +17,7 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		this.entityType = 0;
-		this.speed = 4;
+		this.speed = 7;
 		this.xp = 0;
 		this.entityName = "Player Entity";
 		this.idleSprite = null;

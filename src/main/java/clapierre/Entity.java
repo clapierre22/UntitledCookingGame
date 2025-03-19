@@ -12,6 +12,7 @@ public class Entity {
 	int x, y, width, height;
 	int velocityX, velocityY;
 	int health, damage;
+	Rectangle ignoreGround, currentGround;
 //    0: Player, 1: Enemy, 2: Item
 	int entityType, level, score;
 	boolean onGround, facingRight;
@@ -41,6 +42,8 @@ public class Entity {
 		this.score = 0;
 		this.facingRight = false;
 		this.holdsWeapon = false;
+		this.ignoreGround = null;
+		this.currentGround = null;
 	}
 
 	public void moveLeft() {
@@ -58,6 +61,14 @@ public class Entity {
 	public void jump() {
 		if (onGround) {
 			velocityY = JUMP;
+			onGround = false;
+		}
+	}
+	
+	public void drop() {
+		if (onGround) {
+			ignoreGround = currentGround;
+			velocityY= 0;
 			onGround = false;
 		}
 	}
@@ -80,13 +91,33 @@ public class Entity {
 //        Hash the x value, find the y value and check if the rectangle exists
 		for (Rectangle platform : platforms) {
 			if (getBounds().intersects(platform)) {
-				if (velocityY > 0) { // Falling down
+				currentGround = platform;
+//				Check Dropping
+				if (platform == ignoreGround) {
+					continue;
+				}
+//				When Falling
+				if (velocityY > 0) {
 					y = platform.y - height;
 					velocityY = 0;
 					onGround = true;
+					break;
 				}
 			}
 		}
+		if (velocityY > 0 && ignoreGround != null) {
+			ignoreGround = null;
+		}
+//		for (Rectangle platform : platforms) {
+//			if (getBounds().intersects(platform)) {
+////					When Falling
+//				if (velocityY > 0) {
+//					y = platform.y - height;
+//					velocityY = 0;
+//					onGround = true;
+//				}
+//			}
+//		}
 
 		// Keep player inside window bounds
 		if (x < 0)
