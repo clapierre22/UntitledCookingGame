@@ -49,11 +49,13 @@ public class GamePanel extends JPanel implements ActionListener {
 //		LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
 //		Level testLevel = ll.generateLevel();
 		
+//		Maybe move this to level logic as well
 		platforms.addAll(currentLevel.getPlatforms());
 		
-		for (Rectangle spawn : currentLevel.getEnemySpawn()) {
-			enemies.add(new Enemy(spawn.x, spawn.y));
-		}
+//		UNCOMMENT AFTER IMPLEMENTING ENEMYLOGIC
+//		for (Rectangle spawn : currentLevel.getEnemySpawn()) {
+//			enemies.add(new Enemy(spawn.x, spawn.y));
+//		}
 		
 //		Test platform
 //		platforms.add(new Rectangle(150, 350, 200, 20));
@@ -95,12 +97,14 @@ public class GamePanel extends JPanel implements ActionListener {
 //		Add check for both players being within the goal, which only is drawn when all enemies are dead (maybe add timer starts when both in before switching level)
 		if (ll.atGoal(player1, player2)) { // Needs check for enemies.isEmpty()
 			System.out.println("Both Players Detected within the Goal Bounds");
+//			Below should be added to level logic
 			platforms.clear();
 			currentLevel = ll.generateLevel();
 			platforms.addAll(currentLevel.getPlatforms());
 			platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
 			player1.setPosition(100, FLOORY);
 			player2.setPosition(200, FLOORY);
+//			Respawn enemies here, as if checks that all enemies are already dead
 		}
 		repaint();
 	}
@@ -123,8 +127,10 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		
 //		Draws goal, need to add condition to only do so when enemies.isEmpty()
-		g.setColor(Color.YELLOW);
-		g.fillRect(currentLevel.goal.x, currentLevel.goal.y, currentLevel.goal.width, currentLevel.goal.height);
+		if (enemies.isEmpty()) {
+			g.setColor(Color.YELLOW);
+			g.fillRect(currentLevel.goal.x, currentLevel.goal.y, currentLevel.goal.width, currentLevel.goal.height);
+		}
 		
 //		This is to draw the test characters, to be replaced with sprite logic
 		g.setColor(Color.RED);

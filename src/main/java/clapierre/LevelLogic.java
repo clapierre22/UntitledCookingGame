@@ -137,12 +137,20 @@ public class LevelLogic {
 //				0,4: Top and base layer, spawns one platform in the middle
 				case 0, 4 -> platforms.add(new Rectangle(GamePanel.WIDTH / 2, curY, stdWidth, stdHeight));
 //				1,3: Spawns two platforms evenly spaced
-				case 1, 3 -> platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
-//				Middle, Spawns same as Grid middle
-				case 2 -> platforms.add(new Rectangle(curX, curY, stdWidth, stdHeight));
+				case 1, 3 -> {
+					platforms.add(new Rectangle(GamePanel.WIDTH * 1/3, curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle(GamePanel.WIDTH * 2/3, curY, stdWidth, stdHeight));
 				}
-			    curX += GamePanel.WIDTH / 5;
-			    curX = 0;
+//				Middle, Spawns same as Grid middle
+				case 2 -> {
+					platforms.add(new Rectangle(GamePanel.WIDTH * 1/5, curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle(GamePanel.WIDTH * 3/5, curY, stdWidth, stdHeight));
+					platforms.add(new Rectangle(GamePanel.WIDTH, curY, stdWidth, stdHeight));
+					
+				}
+				}
+//			    curX += GamePanel.WIDTH / 5;
+//			    curX = 0;
 			    curY += 75;
 			}
 		}		
