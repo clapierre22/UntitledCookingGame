@@ -95,7 +95,12 @@ public class GamePanel extends JPanel implements ActionListener {
 //		Add check for both players being within the goal, which only is drawn when all enemies are dead (maybe add timer starts when both in before switching level)
 		if (ll.atGoal(player1, player2)) { // Needs check for enemies.isEmpty()
 			System.out.println("Both Players Detected within the Goal Bounds");
+			platforms.clear();
 			currentLevel = ll.generateLevel();
+			platforms.addAll(currentLevel.getPlatforms());
+			platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
+			player1.setPosition(100, FLOORY);
+			player2.setPosition(200, FLOORY);
 		}
 		repaint();
 	}
