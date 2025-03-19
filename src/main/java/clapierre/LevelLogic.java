@@ -23,7 +23,8 @@ public class LevelLogic {
 		this.enemySpawn = new ArrayList<>();
 		this.width = width;
 		this.height = height;
-		this.goal = new Rectangle(GamePanel.WIDTH - 10, GamePanel.FLOORY, 40, 80);
+//		Goal width + height need to be changed to player width
+		this.goal = new Rectangle(GamePanel.WIDTH - 40, GamePanel.FLOORY - 80, 40, 80);
 	}
 
 	public Level generateLevel() {
@@ -171,10 +172,10 @@ public class LevelLogic {
 	
 	public boolean atGoal(Player player1, Player player2) {
 //		Modify to ensure it is within the bounding box range, not just exact value
-		return player1.x == goal.x
-				&& player1.y == goal.y
-				&& player2.x == goal.x
-				&& player2.y == goal.y;
+		return Math.abs(player1.x - goal.x) < player1.width
+				&& Math.abs(player1.y - goal.y) < player1.height
+				&& Math.abs(player2.x - goal.x) < player2.width
+				&& Math.abs(player2.y - goal.y) < player2.height;
 	}
 	
 //	private Rectangle generateExit() {

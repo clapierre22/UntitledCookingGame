@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	Timer timer;
 	
 	LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
-	Level testLevel = ll.generateLevel();
+	Level currentLevel = ll.generateLevel();
 
 	public GamePanel() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -49,9 +49,9 @@ public class GamePanel extends JPanel implements ActionListener {
 //		LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
 //		Level testLevel = ll.generateLevel();
 		
-		platforms.addAll(testLevel.getPlatforms());
+		platforms.addAll(currentLevel.getPlatforms());
 		
-		for (Rectangle spawn : testLevel.getEnemySpawn()) {
+		for (Rectangle spawn : currentLevel.getEnemySpawn()) {
 			enemies.add(new Enemy(spawn.x, spawn.y));
 		}
 		
@@ -93,8 +93,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		player1.update(platforms);
 		player2.update(platforms);
 //		Add check for both players being within the goal, which only is drawn when all enemies are dead (maybe add timer starts when both in before switching level)
-		if (ll.atGoal(player1, player2)) { // Needs atGoal() in Player.java
-//			Add change level logic, but cannot access level or level logic
+		if (ll.atGoal(player1, player2)) { // Needs check for enemies.isEmpty()
+			System.out.println("Both Players Detected within the Goal Bounds");
+			currentLevel = ll.generateLevel();
 		}
 		repaint();
 	}
@@ -115,6 +116,10 @@ public class GamePanel extends JPanel implements ActionListener {
 				g.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
 			}
 		}
+		
+//		Draws goal, need to add condition to only do so when enemies.isEmpty()
+		g.setColor(Color.YELLOW);
+		g.fillRect(currentLevel.goal.x, currentLevel.goal.y, currentLevel.goal.width, currentLevel.goal.height);
 		
 //		This is to draw the test characters, to be replaced with sprite logic
 		g.setColor(Color.RED);
