@@ -66,9 +66,10 @@ public class Entity {
 	}
 	
 	public void drop() {
+//		WIP
 		if (onGround) {
 			ignoreGround = currentGround;
-			velocityY= 0;
+//			velocityY= JUMP/4;
 			onGround = false;
 		}
 	}
@@ -89,25 +90,36 @@ public class Entity {
 		// Collision detection with platforms
 //        Maybe HashMap of LinkedList or HM of HM
 //        Hash the x value, find the y value and check if the rectangle exists
+//		Dropping still not working
+//		onGround = false;
 		for (Rectangle platform : platforms) {
 			if (getBounds().intersects(platform)) {
-				currentGround = platform;
+//				currentGround = platform;
 //				Check Dropping
 				if (platform == ignoreGround) {
 					continue;
 				}
 //				When Falling
-				if (velocityY > 0) {
+				if (velocityY > 0 && y + height <= platform.y + height) {
 					y = platform.y - height;
 					velocityY = 0;
 					onGround = true;
+					currentGround = platform;
 					break;
 				}
+//				if (velocityY < 0 && y >= platform.y + platform.height - 10) {
+//					y = platform.y + platform.height;
+//					velocityY = 0;
+//					break;
+//				}
 			}
 		}
-		if (velocityY > 0 && ignoreGround != null) {
+		if (onGround) {
 			ignoreGround = null;
 		}
+//		if (velocityY > 0 && ignoreGround != null) {
+//			ignoreGround = null;
+//		}
 //		for (Rectangle platform : platforms) {
 //			if (getBounds().intersects(platform)) {
 ////					When Falling
