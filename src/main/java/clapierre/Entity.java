@@ -96,7 +96,7 @@ public class Entity {
 			if (getBounds().intersects(platform)) {
 //				currentGround = platform;
 //				Check Dropping
-				if (platform == ignoreGround) {
+				if (platform == ignoreGround && platform.y != GamePanel.FLOORY) {
 					continue;
 				}
 //				When Falling
@@ -107,6 +107,8 @@ public class Entity {
 					currentGround = platform;
 					break;
 				}
+				
+//				If needed, this code below would re-allow collisions from the bottom (prevents entity from jumping up through platforms)
 //				if (velocityY < 0 && y >= platform.y + platform.height - 10) {
 //					y = platform.y + platform.height;
 //					velocityY = 0;
@@ -117,25 +119,15 @@ public class Entity {
 		if (onGround) {
 			ignoreGround = null;
 		}
-//		if (velocityY > 0 && ignoreGround != null) {
-//			ignoreGround = null;
-//		}
-//		for (Rectangle platform : platforms) {
-//			if (getBounds().intersects(platform)) {
-////					When Falling
-//				if (velocityY > 0) {
-//					y = platform.y - height;
-//					velocityY = 0;
-//					onGround = true;
-//				}
-//			}
-//		}
 
-		// Keep player inside window bounds
-		if (x < 0)
+		// Keeps player inside GamePanel bounds
+		if (x < 0) {
 			x = 0;
-		if (x + width > GamePanel.WIDTH)
+		}
+		
+		if (x + width > GamePanel.WIDTH) {
 			x = GamePanel.WIDTH - width;
+		}
 	}
 
 	public Rectangle getBounds() {
