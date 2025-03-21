@@ -15,7 +15,7 @@ public class Entity {
 	Rectangle ignoreGround, currentGround;
 //    0: Player, 1: Enemy, 2: Item
 	int entityType, level, score;
-	boolean onGround, facingRight;
+	boolean onGround, facingRight, attacking;
 	boolean pickup;
 	boolean holdsWeapon;
 	int speed;
@@ -44,6 +44,7 @@ public class Entity {
 		this.holdsWeapon = false;
 		this.ignoreGround = null;
 		this.currentGround = null;
+		this.attacking = false;
 	}
 
 	public void moveLeft() {
@@ -75,11 +76,9 @@ public class Entity {
 	}
 
 	public void attack() {
-		if (!onGround) {
-			// Air Attack
-		} else {
-			// Standard Attack
-		}
+//		Mainly used by enemies, could be moved there
+//		GamePanel will handle player attacks, and enemy logic is not yet implemented (enemy logic will have a player that the enemy is targeting, allowing for the player entity to already be stored)
+		attacking = true;
 	}
 
 	public void update(List<Rectangle> platforms) {
@@ -90,7 +89,6 @@ public class Entity {
 		// Collision detection with platforms
 //        Maybe HashMap of LinkedList or HM of HM
 //        Hash the x value, find the y value and check if the rectangle exists
-//		Dropping still not working
 //		onGround = false;
 		for (Rectangle platform : platforms) {
 			if (getBounds().intersects(platform)) {
@@ -128,6 +126,7 @@ public class Entity {
 		if (x + width > GamePanel.WIDTH) {
 			x = GamePanel.WIDTH - width;
 		}
+		
 	}
 
 	public Rectangle getBounds() {

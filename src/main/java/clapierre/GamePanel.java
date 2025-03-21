@@ -27,6 +27,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	
 	LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
 	Level currentLevel = ll.generateLevel();
+	
+	FightingLogic fl = new FightingLogic();
 
 	public GamePanel() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -53,9 +55,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		platforms.addAll(currentLevel.getPlatforms());
 		
 //		UNCOMMENT AFTER IMPLEMENTING ENEMYLOGIC
-//		for (Rectangle spawn : currentLevel.getEnemySpawn()) {
-//			enemies.add(new Enemy(spawn.x, spawn.y));
-//		}
+		for (Rectangle spawn : currentLevel.getEnemySpawn()) {
+			enemies.add(new Enemy(spawn.x, spawn.y));
+		}
 		
 //		Test platform
 //		platforms.add(new Rectangle(150, 350, 200, 20));
@@ -72,11 +74,13 @@ public class GamePanel extends JPanel implements ActionListener {
 					case KeyEvent.VK_RIGHT -> player2.moveRight();
 					case KeyEvent.VK_UP -> player2.jump();
 					case KeyEvent.VK_DOWN -> player2.drop();
+					case KeyEvent.VK_L -> player2.attack();
 					
 					case KeyEvent.VK_A -> player1.moveLeft();
 					case KeyEvent.VK_D -> player1.moveRight();
 					case KeyEvent.VK_W -> player1.jump();
 					case KeyEvent.VK_S -> player1.drop();
+					case KeyEvent.VK_T -> player1.attack();
 				}
 			}
 
@@ -85,8 +89,14 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_D) {
 					player1.stop();
 				}
+				if (e.getKeyCode() == KeyEvent.VK_T) {
+					player1.attacking = false;
+				}
 				if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					player2.stop();
+				}
+				if (e.getKeyCode() == KeyEvent.VK_L) {
+					player2.attacking = false;
 				}
 			}
 		});
@@ -109,6 +119,20 @@ public class GamePanel extends JPanel implements ActionListener {
 			player2.setPosition(200, FLOORY - player2.height);
 //			Respawn enemies here, as if checks that all enemies are already dead
 		}
+		
+//		Collision Detection with Enemies
+		if (player1.attacking) {
+			for (Enemy enemy : enemies) {
+				fl.calculateFightDebug(player1, enemy);
+			}
+		}
+		
+		if (player2.attacking) {
+			for (Enemy enemy : enemies) {
+				fl.calculateFightDebug(player2, enemy);
+			}
+		}
+		
 		repaint();
 	}
 
