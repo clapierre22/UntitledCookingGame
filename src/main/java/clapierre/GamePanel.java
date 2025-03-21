@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
@@ -47,9 +48,6 @@ public class GamePanel extends JPanel implements ActionListener {
 		if (!platforms.isEmpty()) {
 			System.out.println("Platforms Generated, # of Platforms: " + platforms.size());
 		}
-		
-//		LevelLogic ll = new LevelLogic(WIDTH, HEIGHT);
-//		Level testLevel = ll.generateLevel();
 		
 //		Maybe move this to level logic as well
 		platforms.addAll(currentLevel.getPlatforms());
@@ -107,17 +105,35 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		player1.update(platforms);
 		player2.update(platforms);
+		
+//		For later when enemy movement is implemented, which then goes within this loop either by itself or the update method
+		Iterator<Enemy> eI = enemies.iterator();
+		while (eI.hasNext()) {
+			Enemy enemy = eI.next();
+			if (enemy.health <= 0) {
+				eI.remove();
+			}
+		}
+//		for (Enemy enemy : enemies) {
+////			enemy.update(platforms);
+//		}
+		
 //		Add check for both players being within the goal, which only is drawn when all enemies are dead (maybe add timer starts when both in before switching level)
-		if (ll.atGoal(player1, player2)) { // Needs check for enemies.isEmpty()
+		if (ll.atGoal(player1, player2) && enemies.isEmpty()) { // Needs check for enemies.isEmpty()
 			System.out.println("Both Players Detected within the Goal Bounds");
+			
 //			Below should be added to level logic
 			platforms.clear();
 			currentLevel = ll.generateLevel();
 			platforms.addAll(currentLevel.getPlatforms());
 			platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
+			
 			player1.setPosition(100, FLOORY - player1.height);
 			player2.setPosition(200, FLOORY - player2.height);
-//			Respawn enemies here, as if checks that all enemies are already dead
+			
+			for (Rectangle spawn : currentLevel.getEnemySpawn()) {
+				enemies.add(new Enemy(spawn.x, spawn.y));
+			}
 		}
 		
 //		Collision Detection with Enemies
