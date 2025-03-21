@@ -68,14 +68,26 @@ public class GamePanel extends JPanel implements ActionListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
-					case KeyEvent.VK_LEFT -> player2.moveLeft();
-					case KeyEvent.VK_RIGHT -> player2.moveRight();
+					case KeyEvent.VK_LEFT -> {
+						player2.moveLeft();
+						player2.facingRight = false;
+					}
+					case KeyEvent.VK_RIGHT -> {
+						player2.moveRight();
+						player2.facingRight = true;
+					}
 					case KeyEvent.VK_UP -> player2.jump();
 					case KeyEvent.VK_DOWN -> player2.drop();
 					case KeyEvent.VK_L -> player2.attack();
 					
-					case KeyEvent.VK_A -> player1.moveLeft();
-					case KeyEvent.VK_D -> player1.moveRight();
+					case KeyEvent.VK_A -> {
+						player1.moveLeft();
+						player1.facingRight = false;
+					}
+					case KeyEvent.VK_D -> {
+						player1.moveRight();
+						player1.facingRight = true;
+					}
 					case KeyEvent.VK_W -> player1.jump();
 					case KeyEvent.VK_S -> player1.drop();
 					case KeyEvent.VK_T -> player1.attack();
