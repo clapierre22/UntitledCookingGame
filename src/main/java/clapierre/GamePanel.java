@@ -33,8 +33,8 @@ public class GamePanel extends JPanel implements ActionListener {
 		setBackground(Color.CYAN);
 		
 //		Redundant use player outside of level logic, will use playerSpawn in future
-		player1 = new PlayerOne(100, 300);
-		player2 = new PlayerTwo(200, 300);
+		player1 = new PlayerOne(100, 400);
+		player2 = new PlayerTwo(200, 400);
 		
 		platforms = new ArrayList<>();
 //		Floor
@@ -105,8 +105,8 @@ public class GamePanel extends JPanel implements ActionListener {
 			currentLevel = ll.generateLevel();
 			platforms.addAll(currentLevel.getPlatforms());
 			platforms.add(new Rectangle(0, FLOORY, WIDTH, 20));
-			player1.setPosition(100, FLOORY);
-			player2.setPosition(200, FLOORY);
+			player1.setPosition(100, FLOORY - player1.height);
+			player2.setPosition(200, FLOORY - player2.height);
 //			Respawn enemies here, as if checks that all enemies are already dead
 		}
 		repaint();
