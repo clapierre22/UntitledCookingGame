@@ -34,6 +34,11 @@ public class FightingLogic {
 		return false;
 	}
 	
+	private int caclulateKnockback(Entity entityAttackFrom, Entity entityAttackTo) {
+//		Moves entityTo backwards from direction of hit
+		return 0;
+	}
+	
 	public void calculateFightDebug(Entity entityAttackFrom, Entity entityAttackTo) {
 		if (calculateHit(entityAttackFrom, entityAttackTo)) {
 			System.out.println("Original Health: " + entityAttackTo.getHealth());
